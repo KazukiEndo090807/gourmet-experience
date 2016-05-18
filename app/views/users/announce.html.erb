@@ -4,12 +4,12 @@
 
 <h2>お知らせ</h2>
 
-<% if @friends.where(receiver_id: current_user.id).exists? %>
+<% if @friends.where(status: 0).where(receiver_id: current_user.id).exists? %>
 
   <% @friends_senders.each do |sender| %>
     <p><%= sender.nickname %>さんから友人申請が来ています。</p>
 
-   <%= form_for @friend :url => {:controller => 'users', :action => 'friend_accept'} do |f| %>
+   <%= form_for @friend, :url => {:controller => 'users', :action => 'friend_accept'} do |f| %>
      <%= f.hidden_field :receiver_id, :value => current_user.id %>
      <%= f.hidden_field :sender_id, :value => sender.id %>
      <%= f.submit "承認" %>
