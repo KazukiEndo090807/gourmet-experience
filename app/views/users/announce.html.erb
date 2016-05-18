@@ -1,0 +1,24 @@
+<div class="container">
+
+<!-- current_userが友人申請を送られていたら、承認ボタンを表示する -->
+
+<h2>お知らせ</h2>
+
+<% if @friends.where(receiver_id: current_user.id).exists? %>
+
+  <% @friends_senders.each do |sender| %>
+    <p><%= sender.nickname %>さんから友人申請が来ています。</p>
+
+   <%= form_for @friend :url => {:controller => 'users', :action => 'friend_accept'} do |f| %>
+     <%= f.hidden_field :receiver_id, :value => current_user.id %>
+     <%= f.hidden_field :sender_id, :value => sender.id %>
+     <%= f.submit "承認" %>
+   <% end %> <!-- form_for -->
+
+  <% end %> <!-- @friends_senders.each .... -->
+
+<% else %>
+  <p>お知らせはありません。</p>
+<% end %> <!-- if @friends.where.... -->
+
+</div> <!-- div class="container" -->

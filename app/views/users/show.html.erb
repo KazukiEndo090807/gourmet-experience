@@ -1,0 +1,30 @@
+<div class="container" >
+
+<%= link_to 'Bookmark', "/users/#{current_user.id}/bookmark" %> <br />
+<%= link_to 'My Friends', "/users/#{current_user.id}/friends" %> <br />
+<%= link_to 'お知らせ一覧',"/users/#{current_user.id}/announce" %>
+
+    <h1>
+    <p><%= @nickname %>さんの投稿一覧</p>
+
+   </h1>
+
+    <% @posted_restaurants.each do |restaurant| %>
+
+    <div class="col-xs-6">
+    <div class="thumbnail">
+    <img src="<%= restaurant.image %>" class="content_image img-responsive img-thumbnail">
+    <div class="caption" >
+      <h3><%= simple_format(restaurant.r_name) %></h3>
+      場所：<%= simple_format(restaurant.place) %>
+      食べ物：<%= simple_format(restaurant.food) %>
+      感想：<%= simple_format(restaurant.review) %>
+    </div>
+
+    </div>
+    </div>
+
+
+    <% end %>
+
+  </div> <!-- container -->

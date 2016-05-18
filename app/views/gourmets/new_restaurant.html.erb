@@ -1,0 +1,33 @@
+
+<div class="container">
+  <h1 class="page-header">レストランを投稿する</h1>
+
+  <%= form_for(@restaurant, url: '/gourmet_info/restaurants') do |f| %>
+  
+   <div class="form-group">
+    <label>レストラン名</label>
+    <%= f.text_field :r_name, autofocus: true %>
+    <label>画像</label>
+    <%= f.text_field :image, autofocus: true %>
+  </div>
+   <div class="form-group">
+    <label>場所</label>
+    <%= f.text_field :place, autofocus: true %>
+    <label>食べ物の種類</label>
+    <%= f.text_field :food, autofocus: true %>
+  </div>
+  <div class="form-group">
+    <label>価格</label>
+    <%= f.text_field :price, autofocus:true %>
+  </div>
+  <div class="form-group">
+    <label>感想・コメント</label>
+    <%= f.text_area :review, cols: 10, rows: 10, autofocus: true, class: "form-control" %><br />
+  </div>
+
+  <%= f.submit "Post", class: "btn btn-lg btn-primary" %>
+
+  <% end %>
+
+
+</div>

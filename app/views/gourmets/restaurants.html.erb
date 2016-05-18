@@ -1,0 +1,38 @@
+<div class="container">
+<h1 class="page-header"> Restaurants </h1>
+
+<div class="row">
+
+<div class="col-xs-12 col-sm-6">
+
+<% @restaurants.each do |restaurant| %>
+  <label>レストラン名</label>
+  <%= simple_format(restaurant.r_name) %>
+    <img src="<%= restaurant.image %>">
+    <div class="caption" >
+     場所：<%= restaurant.place %> <br />
+     食べ物の種類：<%= restaurant.food %> <br />
+     投稿者：<%= restaurant.user.nickname %><br />
+     <li>
+      <%= link_to '詳細', "/gourmet_info/restaurants/#{restaurant.id}", method: :get %>
+     </li>
+      <% if user_signed_in? && current_user.id == restaurant.user_id %>
+       <li>
+         <%= link_to '編集', "/gourmet_info/restaurants/#{restaurant.id}/edit", method: :get %>
+       </li>
+       <li>
+         <%= link_to '削除', "/gourmet_info/restaurants/#{restaurant.id}", method: :delete %>
+       </li>
+      <% end %> <!-- if user_signed_in? -->
+    </div> <!-- <div class="caption" > -->
+
+  <% end %> <!-- @restaurants.each -->
+
+
+
+</div>
+
+</div>
+
+
+</div>

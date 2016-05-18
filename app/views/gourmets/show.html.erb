@@ -1,0 +1,62 @@
+<div class="container">
+
+ <label>投稿者</label>
+  <%= simple_format(@restaurant.user.nickname) %>
+  <label>レストラン名</label>
+  <%= simple_format(@restaurant.r_name) %>
+    <img src="<%= @restaurant.image %>">
+    <div class="caption" >
+      場所：<%= @restaurant.place %> <br />
+      食べ物の種類：<%= @restaurant.food %> <br />
+      価格：<%= @restaurant.price %>CHF <br />
+      感想・コメント：<%= @restaurant.review %> <br />
+    </div>  <!-- <div class="caption" > -->
+
+    <% if user_signed_in? && current_user.id == @restaurant.user_id %>
+   <div>
+      <li>
+        <%= link_to '編集', "/gourmet_info/restaurants/#{@restaurant.id}/edit", method: :get %>
+      </li>
+      <li>
+        <%= link_to '削除', "/gourmet_info/restaurants/#{@restaurant.id}", method: :delete %>
+      </li>
+  </div>
+  <div>
+
+<% if @favorites.where(restaurant_id: @restaurant.id).where(user_id: current_user.id).exists? %>
+<!-- exists?(restaurant_id: @restaurant.id).exists?(user_id: current_user.id) %> -->
+ブックマーク済み
+<% else %>
+<!-- ブックマークボタン -->
+<%= form_tag("/users/#{current_user.id}/bookmark", method: :post) do %>
+      <%= hidden_field_tag(:restaurant_id, @restaurant.id) %>
+      <%= submit_tag("Add to your Bookmark!") %>
+<% end %> <!-- form_rag -->
+<% end %> <!-- if @favorite.exists?.... -->
+
+
+
+ <% end %> <!-- if user_signed_in? -->
+
+
+ <!-- コメント投稿フォーム -->
+ <% if current_user %> <!-- ログインしていない状態ではコメント投稿フォームは表示されない。 -->
+  <div class="form-group">
+  <%= form_tag("/gourmet_info/restaurants/#{@restaurant.id}/comments", method: :post) do %>
+  <textarea cols="30" name="text" placeholder="コメントする" rows="2"></textarea>
+  <input type="submit" value="SEND" class="btn btn-lg btn-primary">
+  </div>
+  <% end %> <!-- form_tag -->
+  <% end %> <!-- <if current_user > -->
+
+  <h4>＜コメント一覧＞</h4>
+  <% if @comments %> <!-- もしコメントが空の場合にエラーが起きることを防ぐ -->
+   <% @comments.each do |comment| %>
+     <p>
+      <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>: </strong>
+      <%= comment.text %>
+     </p>
+   <% end %> <!-- @comments.each -->
+  <% end %> <!-- if @comments -->
+
+</div> <!-- <div class="container" > -->

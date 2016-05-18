@@ -1,0 +1,5 @@
+<div class="container">
+<% @favorite_restaurants.each do |favorite_restaurant| %>
+ <%= simple_format(favorite_restaurant.r_name) %>
+<% end %>
+</div>

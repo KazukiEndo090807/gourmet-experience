@@ -1,0 +1,8 @@
+<div class="container">
+  <h3><%= current_user.nickname %>さんの友達一覧です</h3>
+
+  <% @my_friends.each do |friend| %>
+   <%= friend.nickname %>
+  <% end %>
+
+</div>

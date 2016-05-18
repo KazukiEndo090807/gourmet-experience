@@ -1,0 +1,28 @@
+.jumbotron-extend {
+    position: relative;
+    height: 100vh;
+    min-height: 300px;
+    background: url(http://imgcp.allabout.co.jp/img-c/1000/auto/tipsplus/feature/115/20151016_1444957671258.jpg);
+    background-size: cover;
+}
+
+.chara {
+    font-color: red;
+}
+
+.jumbotron-container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+div.content_post {
+    @include boxBase(20px 0 ,30px);
+    position: relative;
+    height: 400px;
+    color: #fff;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba($black,0.2);
+    }

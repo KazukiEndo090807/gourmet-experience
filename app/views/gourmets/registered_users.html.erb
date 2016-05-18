@@ -1,0 +1,23 @@
+<div class="container">
+<h1>登録ユーザ一覧</h1>
+
+<% @users.each do |user| %>
+ ユーザ名：<%= user.nickname %>
+
+<% if @friends.where(status:0).where(sender_id: current_user.id).where(receiver_id: user.id).exists? %>
+  <p>Friend申請済み</p>
+<% elsif @friends.where(status:0).where(sender_id: user.id).where(receiver_id: current_user.id).exists? %>
+ <p>Friend申請を受け取っています。</p>
+<% elsif @friends.where(status:1).where(sender_id: current_user.id).where(receiver_id: user.id).exists? %>
+  <p> 友人 </p>
+<% else %>
+<%= form_for @friend, :url => {:controller => 'gourmets', :action => 'friend_offer'} do |f|%>
+<%= f.hidden_field :receiver_id, :value => user.id %>
+<%= f.hidden_field :sender_id, :value => current_user.id %>
+<%= f.submit "Friend申請" %>
+<% end %> <!-- form_for -->
+<% end %> <!-- if @friends.where...... -->
+
+<% end %> <!-- @users.each -->
+
+</div>

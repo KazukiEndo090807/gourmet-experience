@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gourmet</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+   <header class="header">
+
+      <div class="container">
+
+      <div class="jumbotron jumbotron-extended" style="color:#FFF; background:url(http://imgcp.allabout.co.jp/img-c/1000/auto/tipsplus/feature/115/20151016_1444957671258.jpg); gackground-size:cover;">
+      <% if user_signed_in? %>
+      <span><h2><%= current_user.nickname %>さん</h2>
+       </span>
+         <div class="btn-group pull-right">
+            <%= link_to "投稿する", '/gourmet_info/new', class: 'btn btn-primary btn-lg' %>
+            <a href="/users/<%= current_user.id %>" class="btn btn-primary btn-lg">マイページ</a>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-primary btn-lg' %>
+         </div> <!-- div class="btn-group pull-right" -->
+      <% else %> <!-- if user_signed_in? -->
+         <div class="btn-group pull-right">
+            <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+            <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-primary btn-lg' %>
+        </div>
+      <% end %> <!-- if user_signed_in? -->
+      </div> <!-- div class=jumbotron -->
+
+     </div> <!-- div class ="container" -->
+
+
+    </header>
+
+<%= yield %>
+
+</body>
+</html>

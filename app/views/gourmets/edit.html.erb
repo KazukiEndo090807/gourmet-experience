@@ -1,0 +1,35 @@
+<div class="container">
+   <%= form_tag("/gourmet_info/restaurants/#{@restaurant.id}", method: :patch) do %>
+   <h3>編集する</h3>
+
+   <div class="form-group">
+     <label>レストラン名</label>
+     <input placeholder="Restaurant Name" type="text" name="r_name" value="<%= @restaurant.image %>" autofocus="true">
+     <label>画像</label>
+     <input placeholder="Image Url" type="text" name="image" value="<%= @restaurant.image %>" autofocus="true">
+   </div>
+
+   <div class="form-group">
+     <label>場所</label>
+     <input placeholder="Place" type="text" name="place" value="<%= @restaurant.place %>" autofocus="true">
+     <label>食べ物の種類</label>
+     <input placeholder="Food Type" type="text" name="food" value="<%= @restaurant.food %>" autofocus="true">
+   </div>
+
+   <div class="form-group">
+     <label>価格</label>
+     <input placeholder="Price" type="text" name="price" value="<%= @restaurant.price %>" autofocus="true">
+   </div>
+
+   <div class="form-group">
+     <label>感想・コメント</label>
+     <textarea cols="30" name="review" placeholder="review" rows="10"><%= @restaurant.review %></textarea>
+   </div>
+
+
+   <input type="submit" value="SEND" class="btn btn-lg btn-primary">
+
+   <% end %> <!-- form_tag -->
+
+</div> <!-- <div class="container"> -->
+
